@@ -73,7 +73,9 @@ describe('readFileAsynchronously', () => {
   test('should call join with pathToFile', async () => {
     const mockJoin = path.join as jest.MockedFunction<typeof path.join>;
     mockJoin.mockReturnValue('/path');
-    (fs.existsSync as jest.MockedFunction<typeof fs.existsSync>).mockReturnValue(false);
+    (
+      fs.existsSync as jest.MockedFunction<typeof fs.existsSync>
+    ).mockReturnValue(false);
     await readFileAsynchronously(mockPath);
     expect(mockJoin).toHaveBeenCalledWith(__dirname, mockPath);
   });
@@ -81,7 +83,9 @@ describe('readFileAsynchronously', () => {
   test('should return null if file does not exist', async () => {
     const mockJoin = path.join as jest.MockedFunction<typeof path.join>;
     mockJoin.mockReturnValue('/path');
-    (fs.existsSync as jest.MockedFunction<typeof fs.existsSync>).mockReturnValue(false);
+    (
+      fs.existsSync as jest.MockedFunction<typeof fs.existsSync>
+    ).mockReturnValue(false);
     const result = await readFileAsynchronously(mockPath);
     expect(result).toBeNull();
   });
@@ -90,8 +94,12 @@ describe('readFileAsynchronously', () => {
     const mockJoin = path.join as jest.MockedFunction<typeof path.join>;
     mockJoin.mockReturnValue('/path');
     const fileContent = 'Text';
-    (fs.existsSync as jest.MockedFunction<typeof fs.existsSync>).mockReturnValue(true);
-    (promises.readFile as jest.MockedFunction<typeof promises.readFile>).mockResolvedValue(Buffer.from(fileContent));
+    (
+      fs.existsSync as jest.MockedFunction<typeof fs.existsSync>
+    ).mockReturnValue(true);
+    (
+      promises.readFile as jest.MockedFunction<typeof promises.readFile>
+    ).mockResolvedValue(Buffer.from(fileContent));
     const result = await readFileAsynchronously(mockPath);
     expect(result).toBe(fileContent);
   });

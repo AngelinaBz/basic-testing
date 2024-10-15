@@ -1,5 +1,10 @@
 // Uncomment the code below and write your tests
-import { getBankAccount, InsufficientFundsError, TransferFailedError, SynchronizationFailedError } from '.';
+import {
+  getBankAccount,
+  InsufficientFundsError,
+  TransferFailedError,
+  SynchronizationFailedError,
+} from '.';
 
 describe('BankAccount', () => {
   test('should create account with initial balance', () => {
@@ -15,7 +20,9 @@ describe('BankAccount', () => {
   test('should throw error when transferring more than balance', () => {
     const fromAccount = getBankAccount(50);
     const toAccount = getBankAccount(100);
-    expect(() => fromAccount.transfer(100, toAccount)).toThrow(InsufficientFundsError);
+    expect(() => fromAccount.transfer(100, toAccount)).toThrow(
+      InsufficientFundsError,
+    );
   });
 
   test('should throw error when transferring to the same account', () => {
@@ -61,6 +68,8 @@ describe('BankAccount', () => {
   test('should throw SynchronizationFailedError if fetchBalance returned null', async () => {
     const account = getBankAccount(100);
     jest.spyOn(account, 'fetchBalance').mockResolvedValue(null);
-    await expect(account.synchronizeBalance()).rejects.toThrow(SynchronizationFailedError);
+    await expect(account.synchronizeBalance()).rejects.toThrow(
+      SynchronizationFailedError,
+    );
   });
 });
